@@ -1,4 +1,6 @@
 #!\bin\bash
+# Execute with: # curl_cli -kLs https://raw.githubusercontent.com/jimoq/CHKP_api_examples/master/mgmt_cli/gaia_api_set-password-policy.sh | bash
+#
 uid=admin
 pwd=vpn123
 mgmt_sid=$(mgmt_cli login user $uid password $pwd -f json | jq -r '.sid')
