@@ -1,0 +1,44 @@
+#Test File
+testfile=/tmp/testfile.pdf
+ 
+#File name - without path
+file_name=$(basename "$testfile")
+ 
+#Download the test file
+#urifile=http://www.orimi.com/pdf-test.pdf ; curl_cli -k $urifile -o $testfile
+urifile=https://poc-files.threat-cloud.com/demo/win7_64bit.pdf ; curl_cli -k $urifile -o $testfile
+#Server stuff
+#SERVER_1=127.0.0.1:443
+SERVER_2=127.0.0.1:18195
+ 
+api_key="29Y6lWwvc3Qx47P8WYudUJsF9H70LU4w"
+#URI_1="UserCheck/TPAPI"
+URI_2=scrubcloud/GwService/UploadFile
+ 
+TXQ=$(cat $testfile | base64 -w 0 | jq -R --slurp --arg file_name "$file_name" '. as $base64_data |{request: [{protocol_version: "1.1", api_key:"29Y6lWwvc3Qx47P8WYudUJsF9H70LU4w", request_name:"UploadFile", sender :"TEST", subject :"Extraction TEST file", file_orig_name :$file_name, file_enc_data: $base64_data, scrub_options : {"scrub_method":2, scrubbed_parts_codes :[1034,1026,1019,1025,1018,1139,1142,1143,1141,1150,1151,1137,1021],"save_original_file_on_server":false,"profile_name":"Recommended_Profile"}} ]}')
+ 
+echo $TXQ | jq .
+ 
+echo $TXQ | curl_cli -d @- -k -s --compressed -H "Content-Type: text/plain;charset=UTF-8" -H "Connection: keep-alive" --data -H "Accept: */*" -H "Content-type: application/json" -X POST HTTP https://$SERVER_2/$URI_2
+
+
+
+
+echo $TXQ | curl_cli -d @- http://httpbin.org/post
+
+
+20Mbtest file
+https://www.hq.nasa.gov/alsj/a17/A17_FlightPlan.pdf
+
+cat $testfile | base64 -w 0 | jq -c -n -R '. as $data | { data: $data}'
+cat $testfile | base64 -w 0 | jq -c -n -R --arg file_name "$file_name" '. as $base64_data | {file_orig_name :$file_name, file_enc_data: $base64_data}'
+
+
+cat $testfile | base64 -w 0 | jq -R --slurp --arg file_name "$file_name" '. as $base64_data | {file_orig_name :$file_name, file_enc_data: $base64_data}'
+
+cat $testfile | base64 -w 0 | jq -R --slurp --arg file_name "$file_name" '. as $base64_data |{request: [{protocol_version: "1.1", api_key:"29Y6lWwvc3Qx47P8WYudUJsF9H70LU4w", request_name:"UploadFile", sender :"TEST", subject :"Extraction TEST file", file_orig_name :$file_name, file_enc_data: $base64_data, scrub_options : {"scrub_method":2, scrubbed_parts_codes :[1034,1026,1019,1025,1018,1139,1142,1143,1141,1150,1151,1137,1021],"save_original_file_on_server":false,"profile_name":"Recommended_Profile"}} ]}'
+
+
+cat $testfile | base64 -w 0 | jq -R --slurp --arg file_name "$file_name" '. as $base64_data |{request: [{protocol_version: "1.1", api_key:"29Y6lWwvc3Qx47P8WYudUJsF9H70LU4w", request_name:"UploadFile", sender :"TEST", subject :"Extraction TEST file", file_orig_name :$file_name, file_enc_data: $base64_data, scrub_options : {"scrub_method":2, scrubbed_parts_codes :[1034,1026,1019,1025,1018,1139,1142,1143,1141,1150,1151,1137,1021],"save_original_file_on_server":false,"profile_name":"Recommended_Profile"}} ]}' | curl --data-binary @- http://httpbin.org/post
+
+cat $testfile | base64 -w 0 | jq -R --slurp --arg file_name "$file_name" '. as $base64_data |{request: [{protocol_version: "1.1", api_key:"29Y6lWwvc3Qx47P8WYudUJsF9H70LU4w", request_name:"UploadFile", sender :"TEST", subject :"Extraction TEST file", file_orig_name :$file_name, file_enc_data: $base64_data, scrub_options : {"scrub_method":2, scrubbed_parts_codes :[1034,1026,1019,1025,1018,1139,1142,1143,1141,1150,1151,1137,1021],"save_original_file_on_server":false,"profile_name":"Recommended_Profile"}} ]}' | curl_cli -d @- http://httpbin.org/post
