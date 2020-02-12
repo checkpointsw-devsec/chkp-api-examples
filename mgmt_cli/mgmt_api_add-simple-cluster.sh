@@ -1,5 +1,6 @@
 #!/bin/bash
-# Execute with: curl_cli -kLs -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/jimoq/CHKP_api_examples/master/mgmt_cli/mgmt_api_add-simple-cluster.sh | bash
+# Execute with: 
+# curl_cli -kLs -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/jimoq/CHKP_api_examples/master/mgmt_cli/mgmt_api_add-simple-cluster.sh | bash
 #
 mgmt_cli -r true add-simple-cluster \
   name "cluster1" color "yellow" \
