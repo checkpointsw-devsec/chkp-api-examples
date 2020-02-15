@@ -1,7 +1,7 @@
 provider "checkpoint" {
-	server = "192.168.233.60"
+	server = "CHANGE TO MGMT SERVER IP"
 	username = "api_user"
-	password = "Cpwins1!"
+	password = "CHANGE TO ADMIN PASSWORD"
 	context = "web_api"
 }
 
