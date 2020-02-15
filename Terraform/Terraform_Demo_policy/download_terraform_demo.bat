@@ -10,4 +10,4 @@ curl -kLs https://raw.githubusercontent.com/jimoq/CHKP_api_examples/master/Terra
 curl -kLs https://raw.githubusercontent.com/jimoq/CHKP_api_examples/master/Terraform/Terraform_Demo_policy/rules.tf > rules.tf.orig
 curl -kLs https://raw.githubusercontent.com/jimoq/CHKP_api_examples/master/Terraform/Terraform_Demo_policy/services.tf > services.tf
 echo "Files stored in Terraform_Demo_policy directory"
-echo "done"
+echo "All done"
