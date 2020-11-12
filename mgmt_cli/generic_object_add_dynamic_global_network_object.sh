@@ -25,4 +25,4 @@ function usage()
 # Start the script and check that all parameters are added as required
 [[ $# -eq 0 ]] && usage
 
-mgmt_cli -r true -d Global -f json add-generic-object create "com.checkpoint.blades_common.objects.DynamicGlobalNetworkObject" name "$1"
+mgmt_cli -r true -d Global -f json add-generic-object create "com.checkpoint.blades_common.objects.DynamicGlobalNetworkObject" name "$1"_global
