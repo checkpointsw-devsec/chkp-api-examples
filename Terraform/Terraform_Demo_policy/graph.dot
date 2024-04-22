@@ -1,0 +1,110 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] checkpoint_management_logout.logout (expand)" [label = "checkpoint_management_logout.logout", shape = "box"]
+		"[root] checkpoint_management_publish.publish (expand)" [label = "checkpoint_management_publish.publish", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_layer.AWS_Perimeter_URLF (expand)" [label = "module.policy.checkpoint_management_access_layer.AWS_Perimeter_URLF", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.allowrule2 (expand)" [label = "module.policy.checkpoint_management_access_rule.allowrule2", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.allowrule3 (expand)" [label = "module.policy.checkpoint_management_access_rule.allowrule3", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.blockrule1 (expand)" [label = "module.policy.checkpoint_management_access_rule.blockrule1", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.perimeterrule1 (expand)" [label = "module.policy.checkpoint_management_access_rule.perimeterrule1", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.perimeterrule2 (expand)" [label = "module.policy.checkpoint_management_access_rule.perimeterrule2", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.rule1 (expand)" [label = "module.policy.checkpoint_management_access_rule.rule1", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.rule2 (expand)" [label = "module.policy.checkpoint_management_access_rule.rule2", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.rule3 (expand)" [label = "module.policy.checkpoint_management_access_rule.rule3", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_rule.rule4 (expand)" [label = "module.policy.checkpoint_management_access_rule.rule4", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_section.accesssection (expand)" [label = "module.policy.checkpoint_management_access_section.accesssection", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_section.autoscalecleanupsection (expand)" [label = "module.policy.checkpoint_management_access_section.autoscalecleanupsection", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_section.autoscalejumphostsection (expand)" [label = "module.policy.checkpoint_management_access_section.autoscalejumphostsection", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_section.cleanupsection (expand)" [label = "module.policy.checkpoint_management_access_section.cleanupsection", shape = "box"]
+		"[root] module.policy.checkpoint_management_access_section.jumpsection (expand)" [label = "module.policy.checkpoint_management_access_section.jumpsection", shape = "box"]
+		"[root] module.policy.checkpoint_management_application_site.blocksite1 (expand)" [label = "module.policy.checkpoint_management_application_site.blocksite1", shape = "box"]
+		"[root] module.policy.checkpoint_management_dns_domain.jumphost (expand)" [label = "module.policy.checkpoint_management_dns_domain.jumphost", shape = "box"]
+		"[root] module.policy.checkpoint_management_dynamic_object.localgatewayexternal (expand)" [label = "module.policy.checkpoint_management_dynamic_object.localgatewayexternal", shape = "box"]
+		"[root] module.policy.checkpoint_management_dynamic_object.localgatewayinternal (expand)" [label = "module.policy.checkpoint_management_dynamic_object.localgatewayinternal", shape = "box"]
+		"[root] module.policy.checkpoint_management_host.azurelbhealthcheck (expand)" [label = "module.policy.checkpoint_management_host.azurelbhealthcheck", shape = "box"]
+		"[root] module.policy.checkpoint_management_host.internallb (expand)" [label = "module.policy.checkpoint_management_host.internallb", shape = "box"]
+		"[root] module.policy.checkpoint_management_host.rdphost (expand)" [label = "module.policy.checkpoint_management_host.rdphost", shape = "box"]
+		"[root] module.policy.checkpoint_management_network.vpc_local (expand)" [label = "module.policy.checkpoint_management_network.vpc_local", shape = "box"]
+		"[root] module.policy.checkpoint_management_package.AWS_AutoScale (expand)" [label = "module.policy.checkpoint_management_package.AWS_AutoScale", shape = "box"]
+		"[root] module.policy.checkpoint_management_package.AWS_Perimeter (expand)" [label = "module.policy.checkpoint_management_package.AWS_Perimeter", shape = "box"]
+		"[root] module.policy.checkpoint_management_service_tcp.healthcheck (expand)" [label = "module.policy.checkpoint_management_service_tcp.healthcheck", shape = "box"]
+		"[root] module.policy.checkpoint_management_service_tcp.tcp33890 (expand)" [label = "module.policy.checkpoint_management_service_tcp.tcp33890", shape = "box"]
+		"[root] module.policy.checkpoint_management_service_tcp.tcp8090 (expand)" [label = "module.policy.checkpoint_management_service_tcp.tcp8090", shape = "box"]
+		"[root] null_resource.installpolicy (expand)" [label = "null_resource.installpolicy", shape = "box"]
+		"[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]" [label = "provider[\"registry.terraform.io/checkpointsw/checkpoint\"]", shape = "diamond"]
+		"[root] provider[\"registry.terraform.io/hashicorp/null\"]" [label = "provider[\"registry.terraform.io/hashicorp/null\"]", shape = "diamond"]
+		"[root] var.policy_install" [label = "var.policy_install", shape = "note"]
+		"[root] checkpoint_management_logout.logout (expand)" -> "[root] checkpoint_management_publish.publish (expand)"
+		"[root] checkpoint_management_publish.publish (expand)" -> "[root] module.policy (close)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_access_section.accesssection (expand)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_access_section.autoscalecleanupsection (expand)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_access_section.cleanupsection (expand)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_dynamic_object.localgatewayinternal (expand)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_host.azurelbhealthcheck (expand)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_host.internallb (expand)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_host.rdphost (expand)"
+		"[root] module.policy (close)" -> "[root] module.policy.checkpoint_management_service_tcp.healthcheck (expand)"
+		"[root] module.policy.checkpoint_management_access_layer.AWS_Perimeter_URLF (expand)" -> "[root] module.policy.checkpoint_management_package.AWS_Perimeter (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.allowrule2 (expand)" -> "[root] module.policy.checkpoint_management_access_rule.blockrule1 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.allowrule3 (expand)" -> "[root] module.policy.checkpoint_management_access_rule.allowrule2 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.blockrule1 (expand)" -> "[root] module.policy.checkpoint_management_access_layer.AWS_Perimeter_URLF (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.blockrule1 (expand)" -> "[root] module.policy.checkpoint_management_application_site.blocksite1 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.perimeterrule1 (expand)" -> "[root] module.policy.checkpoint_management_access_section.jumpsection (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.perimeterrule1 (expand)" -> "[root] module.policy.checkpoint_management_dns_domain.jumphost (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.perimeterrule2 (expand)" -> "[root] module.policy.checkpoint_management_access_layer.AWS_Perimeter_URLF (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.perimeterrule2 (expand)" -> "[root] module.policy.checkpoint_management_access_rule.perimeterrule1 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.perimeterrule2 (expand)" -> "[root] module.policy.checkpoint_management_network.vpc_local (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule1 (expand)" -> "[root] module.policy.checkpoint_management_access_section.autoscalejumphostsection (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule1 (expand)" -> "[root] module.policy.checkpoint_management_dns_domain.jumphost (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule2 (expand)" -> "[root] module.policy.checkpoint_management_access_rule.rule1 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule2 (expand)" -> "[root] module.policy.checkpoint_management_network.vpc_local (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule3 (expand)" -> "[root] module.policy.checkpoint_management_access_rule.rule2 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule4 (expand)" -> "[root] module.policy.checkpoint_management_access_rule.rule3 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule4 (expand)" -> "[root] module.policy.checkpoint_management_dynamic_object.localgatewayexternal (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule4 (expand)" -> "[root] module.policy.checkpoint_management_service_tcp.tcp33890 (expand)"
+		"[root] module.policy.checkpoint_management_access_rule.rule4 (expand)" -> "[root] module.policy.checkpoint_management_service_tcp.tcp8090 (expand)"
+		"[root] module.policy.checkpoint_management_access_section.accesssection (expand)" -> "[root] module.policy.checkpoint_management_access_rule.perimeterrule2 (expand)"
+		"[root] module.policy.checkpoint_management_access_section.autoscalecleanupsection (expand)" -> "[root] module.policy.checkpoint_management_access_rule.rule4 (expand)"
+		"[root] module.policy.checkpoint_management_access_section.autoscalejumphostsection (expand)" -> "[root] module.policy.checkpoint_management_package.AWS_AutoScale (expand)"
+		"[root] module.policy.checkpoint_management_access_section.cleanupsection (expand)" -> "[root] module.policy.checkpoint_management_access_rule.allowrule3 (expand)"
+		"[root] module.policy.checkpoint_management_access_section.cleanupsection (expand)" -> "[root] module.policy.checkpoint_management_access_rule.perimeterrule2 (expand)"
+		"[root] module.policy.checkpoint_management_access_section.jumpsection (expand)" -> "[root] module.policy.checkpoint_management_package.AWS_Perimeter (expand)"
+		"[root] module.policy.checkpoint_management_application_site.blocksite1 (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_application_site.blocksite1 (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_dns_domain.jumphost (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_dns_domain.jumphost (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_dynamic_object.localgatewayexternal (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_dynamic_object.localgatewayexternal (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_dynamic_object.localgatewayinternal (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_dynamic_object.localgatewayinternal (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_host.azurelbhealthcheck (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_host.azurelbhealthcheck (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_host.internallb (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_host.internallb (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_host.rdphost (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_host.rdphost (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_network.vpc_local (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_network.vpc_local (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_package.AWS_AutoScale (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_package.AWS_AutoScale (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_package.AWS_Perimeter (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_package.AWS_Perimeter (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_service_tcp.healthcheck (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_service_tcp.healthcheck (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_service_tcp.tcp33890 (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_service_tcp.tcp33890 (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] module.policy.checkpoint_management_service_tcp.tcp8090 (expand)" -> "[root] module.policy (expand)"
+		"[root] module.policy.checkpoint_management_service_tcp.tcp8090 (expand)" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"]"
+		"[root] null_resource.installpolicy (expand)" -> "[root] checkpoint_management_publish.publish (expand)"
+		"[root] null_resource.installpolicy (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/null\"]"
+		"[root] null_resource.installpolicy (expand)" -> "[root] var.policy_install"
+		"[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"] (close)" -> "[root] checkpoint_management_logout.logout (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/null\"] (close)" -> "[root] null_resource.installpolicy (expand)"
+		"[root] root" -> "[root] local.publish_triggers (expand)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/checkpointsw/checkpoint\"] (close)"
+		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/null\"] (close)"
+	}
+}
+
