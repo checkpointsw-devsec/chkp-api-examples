@@ -1,0 +1,16 @@
+{
+    "name": "chkp-api-examples",
+    "image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "hashicorp.terraform",
+        "ms-azuretools.vscode-docker",
+        "humao.rest-client"
+    ],
+    "postCreateCommand": "/bin/bash ./.devcontainer/post-install.sh"
+}
