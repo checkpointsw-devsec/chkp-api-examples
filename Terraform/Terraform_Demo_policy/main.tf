@@ -27,8 +27,6 @@ provider "checkpoint" {
   context       = "web_api"
   timeout       = "120"
 */
-
-
 }
 
 
@@ -62,6 +60,8 @@ resource "checkpoint_management_publish" "publish" {
 #  triggers = local.publish_version
 #}
 
+/*
+Needs to be updated with the install policy resource as it supports triggers from version 1.2 of the provider
 variable "policy_install" {
   type    = bool
   default = false
@@ -80,6 +80,4 @@ resource "null_resource" "installpolicy" {
 }
 depends_on = [checkpoint_management_publish.publish]
 }
-resource "checkpoint_management_logout" "logout" {
-  depends_on = [checkpoint_management_publish.publish]
-}
+*/
