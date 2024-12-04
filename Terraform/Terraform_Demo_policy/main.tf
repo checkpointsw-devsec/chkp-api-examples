@@ -7,26 +7,34 @@ terraform {
    }
 }
 
-provider "checkpoint" {
-  # Configuration options
+provider checkpoint {
+# Configuration options 
+domain = "System Data" # used when adding administrators
+#domain = "SMC User" # Default, used when updating security policy on SmartCenter
 }
 
-
-
-module "policy" {
+## This module will update the securuty policy in a MDS domain or SmartCenter
+/*module "check-point" {
   source = "./policy"
+}*/
+
+# This module will update administrators on a MDS or SmartCenter
+module "check-point" {
+  source = "./system-data"
 }
 
 // Example 1 - Trigger the publish resource every time there is a change on any of the configuration files in a specific module
 // Expression to use to hash all files in directory policy that is used by the policy module
 locals {
-  publish_triggers = [for filename in fileset(path.module, "policy/*.tf"): filesha256(filename)]
+  publish_trigger-policy = [for filename in fileset(path.module, "policy/*.tf"): filesha256(filename)]
+  publish_trigger-admins = [for filename in fileset(path.module, "system-data/*.tf"): filesha256(filename)]
 }
 
 // Triggers publish if any of the hashes of the files in the policy directory changed.
 resource "checkpoint_management_publish" "publish" {
-  depends_on = [ module.policy ]
-  triggers = local.publish_triggers
+  depends_on = [ module.check-point]
+  triggers = flatten([local.publish_trigger-policy, local.publish_trigger-admins])
+
   run_publish_on_destroy = true
 }
 

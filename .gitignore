@@ -12,6 +12,19 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Terraform files
+#*.tfvars
+set_terrform_env_var.sh
+.terraform/
+*.tfstate*
+fingerprints.json
+*.lock.hcl
+*.creds
+
+# Check Point terraform provider generated files
+terraform-provider-checkpoint
+sid.json
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

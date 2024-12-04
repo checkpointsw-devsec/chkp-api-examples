@@ -1,10 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-import requests
-import sys
 import os
+import requests
 import json
 import time
+import sys
 
 # Get the server address from the environment variable CHECKPOINT_SERVER
 checkpoint_server = os.getenv('CHECKPOINT_SERVER', '10.2.0.84')  # Default to '10.2.0.84' if env variable is not set
@@ -16,7 +16,7 @@ with open('sid.json', 'r') as json_file:
 sid = data['sid']
 
 # Set login info
-url = "https://{}/web_api/publish".format(checkpoint_server)
+url = f"https://{checkpoint_server}/web_api/publish"
 payload = "{}"
 headers = {
     'Content-Type': "application/json",
@@ -28,11 +28,11 @@ headers = {
 requests.packages.urllib3.disable_warnings()
 
 # Send the POST request to publish
-response = requests.request("POST", url, data=payload, headers=headers, verify=False)
+response = requests.post(url, data=payload, headers=headers, verify=False)
 
 # Grab the Task id from the response
-api_json = json.loads(response.text)
-print "Task ID is " + api_json['task-id']
+api_json = response.json()
+print(f"Task ID is {api_json['task-id']}")
 
 # Sleep for 2 seconds before checking the status of the Task
 time.sleep(2)
@@ -40,15 +40,15 @@ time.sleep(2)
 # Check the status of the task
 progress_percentage = 0
 while progress_percentage < 100:
-    url = "https://{}/web_api/show-task".format(checkpoint_server)
-    payload = "{\r\n  \"task-id\" : \"" + api_json['task-id'] + "\"}"
-    response = requests.request("POST", url, data=payload, headers=headers, verify=False)
+    url = f"https://{checkpoint_server}/web_api/show-task"
+    payload = json.dumps({"task-id": api_json['task-id']})
+    response = requests.post(url, data=payload, headers=headers, verify=False)
     
-    task_status = json.loads(response.text)
-    sys.stdout.write("\rProgress " + str(task_status['tasks'][0]['progress-percentage']) + "%")
+    task_status = response.json()
+    sys.stdout.write(f"\rProgress {task_status['tasks'][0]['progress-percentage']}%")
     sys.stdout.flush()
     
     progress_percentage = task_status['tasks'][0]['progress-percentage']
     time.sleep(1)
 
-print ""
+print("")
