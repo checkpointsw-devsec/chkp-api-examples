@@ -7,10 +7,28 @@ terraform {
    }
 }
 
-provider checkpoint {
-# Configuration options 
-domain = "System Data" # used when adding administrators
-#domain = "SMC User" # Default, used when updating security policy on SmartCenter
+provider "checkpoint" {
+  # Configuration options
+  domain = "System Data" # used when adding administrators
+  #domain = "SMC User" # Default, used when updating security policy on SmartCenter
+/*
+  # Smart-1 Cloud example
+  server        = "chkp-jim-xxx-nxx22x11.maas.checkpoint.com"
+  api_key       = "XYZbv4ZyxdM+SdtjRI8AmjA=="
+  context       = "web_api"
+  cloud_mgmt_id = "77zz4yxx-c457-4646-8e63-d67e55345af8"
+  timeout       = "120"
+*/
+/*
+  # On premises Management example  
+  server        = "192.168.233.40"
+  #api_key      = ""
+  username      = "api_user"
+  password      = "vpn123"
+  #domain       = "Domain Name"
+  context       = "web_api"
+  timeout       = "120"
+*/
 }
 
 ## This module will update the securuty policy in a MDS domain or SmartCenter
@@ -38,6 +56,11 @@ resource "checkpoint_management_publish" "publish" {
   run_publish_on_destroy = true
 }
 
+resource "checkpoint_management_logout" "logout" {
+  depends_on = [checkpoint_management_publish.publish]
+  triggers = flatten([local.publish_trigger-policy, local.publish_trigger-admins])
+}
+
 //Example 2 - Trigger the publish resource if version number is changed 
 // Set the publish version number (this expression can be improved and made more intelligent)
 #locals {
@@ -50,6 +73,8 @@ resource "checkpoint_management_publish" "publish" {
 #  triggers = local.publish_version
 #}
 
+/*
+Needs to be updated with the install policy resource as it supports triggers from version 1.2 of the provider
 variable "policy_install" {
   type    = bool
   default = false
@@ -68,6 +93,4 @@ resource "null_resource" "installpolicy" {
 }
 depends_on = [checkpoint_management_publish.publish]
 }
-resource "checkpoint_management_logout" "logout" {
-  depends_on = [checkpoint_management_publish.publish]
-}
+*/

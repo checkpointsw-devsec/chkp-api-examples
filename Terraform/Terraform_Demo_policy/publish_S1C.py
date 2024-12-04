@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import getopt
 import requests
 import sys
 import os
@@ -8,6 +9,7 @@ import time
 
 # Extracting environment variables
 checkpoint_server = os.environ.get('CHECKPOINT_SERVER')
+checkpoint_cloud_mgmt_id = os.environ.get('CHECKPOINT_CLOUD_MGMT_ID')
 
 # Open the JSON file containing session ID
 with open('sid.json', 'r') as json_file:
@@ -17,7 +19,7 @@ with open('sid.json', 'r') as json_file:
 sid = data['sid']
 
 # Set login info
-url = f"https://{checkpoint_server}/web_api/publish"
+url = f"https://{checkpoint_server}/{checkpoint_cloud_mgmt_id}/web_api/publish"
 payload = "{}"
 headers = {
     'Content-Type': "application/json",
@@ -42,7 +44,7 @@ time.sleep(2)
 progress_percentage = 0
 while progress_percentage < 100:
     # Make a POST request to get task status
-    url = f"https://{checkpoint_server}/web_api/show-task"
+    url = f"https://{checkpoint_server}/{checkpoint_cloud_mgmt_id}/web_api/show-task"
     payload = {
         "task-id": api_json['task-id']  # Use a dictionary directly
     }
