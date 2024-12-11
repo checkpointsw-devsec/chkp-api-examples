@@ -34,6 +34,7 @@
         name: test
         real_name: 'test user'
         password_hash: '$6$OgI.RZCV3v8fzV31$1lUh7jWPnZ7Kgig.8GiLcB3aVvQKZBSoarUCIRDNMwUHonNvSnAT4XV3UT4x2ZifMuMGLWGay6T7STn4TcTKD0'
+        # set password to vpn123
       register: updated_test_user
  
     - name: print test user settings
@@ -45,6 +46,7 @@
       check_point.gaia.cp_gaia_user:
         name: admin
         password_hash: '$6$OgI.RZCV3v8fzV31$1lUh7jWPnZ7Kgig.8GiLcB3aVvQKZBSoarUCIRDNMwUHonNvSnAT4XV3UT4x2ZifMuMGLWGay6T7STn4TcTKD0'
+        # set password to vpn123
       register: updated_admin_user
  
     - name: print admin user settings
