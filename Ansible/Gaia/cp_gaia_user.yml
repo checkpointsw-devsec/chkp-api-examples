@@ -1,0 +1,53 @@
+# change the host to the ip of the target gaia machine and use the same ip as inventory in you command.
+# for example: ansible-playbook cp_gaia_user.yml -i 192.168.233.51,
+- name: retrieving and change admin users admin and test
+  hosts: 192.168.233.51
+  connection: httpapi
+  gather_facts: false
+  vars:
+    ansible_httpapi_use_ssl: True
+    ansible_httpapi_validate_certs: False
+    ansible_network_os: check_point.gaia.checkpoint
+    ansible_user: admin
+    ansible_ssh_pass: vpn123
+  collections:
+    - check_point.gaia
+  tasks:
+
+    - name: get admin user details
+      cp_gaia_user_facts:
+        name: admin
+      register: original_admin_user
+ 
+    - name: print admin user details
+      debug:
+        msg: "{{ original_admin_user }}"
+ 
+    - name: create the test user
+      check_point.gaia.cp_gaia_user:
+        name: test
+        uid: 0
+      register: updated_test_user
+
+    - name: Set password for the test user
+      check_point.gaia.cp_gaia_user:
+        name: test
+        real_name: 'test user'
+        password_hash: '$6$OgI.RZCV3v8fzV31$1lUh7jWPnZ7Kgig.8GiLcB3aVvQKZBSoarUCIRDNMwUHonNvSnAT4XV3UT4x2ZifMuMGLWGay6T7STn4TcTKD0'
+      register: updated_test_user
+ 
+    - name: print test user settings
+      debug:
+        msg: "{{ updated_test_user }}"
+      when: updated_test_user['changed'] == true
+
+    - name: Set password for the admin user
+      check_point.gaia.cp_gaia_user:
+        name: admin
+        password_hash: '$6$OgI.RZCV3v8fzV31$1lUh7jWPnZ7Kgig.8GiLcB3aVvQKZBSoarUCIRDNMwUHonNvSnAT4XV3UT4x2ZifMuMGLWGay6T7STn4TcTKD0'
+      register: updated_admin_user
+ 
+    - name: print admin user settings
+      debug:
+        msg: "{{ updated_admin_user }}"
+      when: updated_admin_user['changed'] == true
