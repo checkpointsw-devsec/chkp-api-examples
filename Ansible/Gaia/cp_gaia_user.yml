@@ -8,7 +8,7 @@
     ansible_httpapi_use_ssl: True
     ansible_httpapi_validate_certs: False
     ansible_network_os: check_point.gaia.checkpoint
-    ansible_user: test
+    ansible_user: admin
     ansible_ssh_pass: vpn123
   collections:
     - check_point.gaia
