@@ -1,5 +1,5 @@
 # change the host to the ip of the target gaia machine and use the same ip as inventory in you command.
-# for example: ansible-playbook cp_gaia_user.yml -i 192.168.233.51,
+# for example: "ansible-playbook cp_gaia_user.yml -i 192.168.233.51,"
 - name: retrieving and change admin users admin and test
   hosts: 192.168.233.51
   connection: httpapi
