@@ -8,7 +8,7 @@
     ansible_httpapi_use_ssl: True
     ansible_httpapi_validate_certs: False
     ansible_network_os: check_point.gaia.checkpoint
-    ansible_user: admin
+    ansible_user: test
     ansible_ssh_pass: vpn123
   collections:
     - check_point.gaia
@@ -24,13 +24,13 @@
         msg: "{{ original_admin_user }}"
  
     - name: create the test user
-      check_point.gaia.cp_gaia_user:
+      cp_gaia_user:
         name: test
         uid: 0
       register: updated_test_user
 
     - name: Set password for the test user
-      check_point.gaia.cp_gaia_user:
+      cp_gaia_user:
         name: test
         real_name: 'test user'
         password_hash: '$6$OgI.RZCV3v8fzV31$1lUh7jWPnZ7Kgig.8GiLcB3aVvQKZBSoarUCIRDNMwUHonNvSnAT4XV3UT4x2ZifMuMGLWGay6T7STn4TcTKD0'
@@ -43,7 +43,7 @@
       when: updated_test_user['changed'] == true
 
     - name: Set password for the admin user
-      check_point.gaia.cp_gaia_user:
+      cp_gaia_user:
         name: admin
         password_hash: '$6$OgI.RZCV3v8fzV31$1lUh7jWPnZ7Kgig.8GiLcB3aVvQKZBSoarUCIRDNMwUHonNvSnAT4XV3UT4x2ZifMuMGLWGay6T7STn4TcTKD0'
         # set password to vpn123
