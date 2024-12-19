@@ -1,0 +1,59 @@
+terraform {
+   required_providers {
+     checkpoint = {
+       source = "checkpointsw/checkpoint"
+     }
+   }
+}
+
+provider "checkpoint" {
+  alias   = "system_data_domain"
+  context = "web_api"
+  domain  = "System Data"
+  timeout = "120"
+}
+
+provider "checkpoint" {
+  alias   = "user_domain"
+  context = "web_api"
+  domain  = "SMC User"
+  timeout = "120"
+}
+
+# This module will update administrators on a MDS or SmartCenter
+module "admins" {
+  source = "./system-data"
+  providers = {
+    checkpoint = checkpoint.system_data_domain
+  }
+}
+
+## This module will update the security policy in a MDS domain or SmartCenter
+module "policy" {
+  source = "./policy"
+  providers = {
+    checkpoint = checkpoint.user_domain
+  }
+}
+
+// Trigger the publish resource every time there is a change on any of the configuration files in a specific module
+// Expression to use to hash all files in directory policy that is used by the policy module
+locals {
+  publish_trigger-policy = [for filename in fileset(path.module, "policy/*.tf"): filesha256(filename)]
+  publish_trigger-admins = [for filename in fileset(path.module, "system-data/*.tf"): filesha256(filename)]
+}
+
+// Triggers publish if any of the hashes of the files in the policy directory changed.
+resource "checkpoint_management_publish" "publish" {
+  depends_on = [module.policy]
+  triggers   = flatten([local.publish_trigger-policy, local.publish_trigger-admins])
+
+  run_publish_on_destroy = true
+  provider = checkpoint.user_domain
+}
+
+resource "checkpoint_management_logout" "logout" {
+  depends_on = [checkpoint_management_publish.publish]
+  provider   = checkpoint.user_domain
+}
+

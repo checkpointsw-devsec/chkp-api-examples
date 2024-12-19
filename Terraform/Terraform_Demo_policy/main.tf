@@ -9,8 +9,8 @@ terraform {
 
 provider "checkpoint" {
   # Configuration options
-  domain = "System Data" # used when adding administrators
-  #domain = "SMC User" # Default, used when updating security policy on SmartCenter
+  #domain = "System Data" # used when adding administrators
+  domain = "SMC User" # Default, used when updating security policy on SmartCenter
 /*
   # Smart-1 Cloud example
   server        = "chkp-jim-xxx-nxx22x11.maas.checkpoint.com"
@@ -32,14 +32,14 @@ provider "checkpoint" {
 }
 
 ## This module will update the securuty policy in a MDS domain or SmartCenter
-/*module "check-point" {
+module "check-point" {
   source = "./policy"
-}*/
+}
 
 # This module will update administrators on a MDS or SmartCenter
-module "check-point" {
+/*module "check-point" {
   source = "./system-data"
-}
+}*/
 
 // Example 1 - Trigger the publish resource every time there is a change on any of the configuration files in a specific module
 // Expression to use to hash all files in directory policy that is used by the policy module
