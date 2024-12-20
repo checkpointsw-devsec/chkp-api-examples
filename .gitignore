@@ -24,6 +24,7 @@ fingerprints.json
 # Check Point terraform provider generated files
 terraform-provider-checkpoint
 sid.json
+*sid.json
 
 # Build results
 [Dd]ebug/

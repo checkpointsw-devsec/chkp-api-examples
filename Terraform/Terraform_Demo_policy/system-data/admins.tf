@@ -1,8 +1,8 @@
 resource "checkpoint_management_administrator" "admin" { 
-  name = "roadmin"
+  name = "tfroadmin"
   permissions_profile {
    domain = "SMC User"
    profile = "Read Only All"
 }
-password = "vpnl23"
+password = "vpn123"
 }
